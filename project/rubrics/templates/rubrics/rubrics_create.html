@@ -303,6 +303,16 @@ Rúbricas - Plataforma de evaluación
         b=false;
     }
 
+    if(min>=max){
+      falta.push("-duración mínima debe ser menor que duración máxima\n");
+      b=false;
+    }
+
+    if(min <0 || max < 0){
+      falta.push("-las duraciones de tiempo deben ser mayores que 0");
+      b=false;
+    }
+
     var exists = false;
     {% for name in names %}
       if (name == '{{name}}')
