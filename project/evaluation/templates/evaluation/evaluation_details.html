@@ -258,11 +258,21 @@ function evaluar(){
         inp.setAttribute("value", lis[i].innerHTML);
         f.appendChild(inp);
     }
-    var inp = document.createElement('input')
+    var inp = document.createElement('input');
     inp.setAttribute("type", 'hidden');
     inp.setAttribute("name", 'cantidad');
     inp.setAttribute("value", n);
     f.appendChild(inp);
+
+    var time= document.createElement('input');
+    time.setAttribute("type",'hidden');
+    time.setAttribute("name",'minutes');
+
+    var today = new Date();
+    var minutes =today.getMinutes();
+
+    time.setAttribute("value",minutes);
+    f.appendChild(time);
     document.getElementById('submit').style.display='block';
 }
 

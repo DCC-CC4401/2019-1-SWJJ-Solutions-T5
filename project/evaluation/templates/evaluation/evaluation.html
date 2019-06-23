@@ -94,7 +94,10 @@ Detalles de la evaluación - Plataforma de evaluación
       </div>
 <div class="w3-container" id="designers" style="margin-top:50px">
     <div id="evaluate" class="w3-container w3-center">
-        <p>Seleccione el nivel de logro alcanzado por el grupo en cada ámbito</p> </div>
+        <p>Seleccione el nivel de logro alcanzado por el grupo en cada ámbito</p>
+        <p id="minutoIni" hidden="true">{{minutes}}</p>
+        <p id="minmin" hidden="true"> {{minmin}} </p>
+        <p id="minmax" hidden="true"> {{minmax}} </p></div>
 
     </div>
     <div>
@@ -242,6 +245,21 @@ Detalles de la evaluación - Plataforma de evaluación
         console.log(divs.length);
         console.log(respondido);
         if(respondido == divs.length){
+            var today = new Date();
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+            var minmin=document.getElementById("minmin").innerText;
+            var minmax=document.getElementById("minmax").innerText;
+
+            var expTime=today.getMinutes()-document.getElementById("minutoIni").innerText;
+
+
+            if(expTime<minmin){
+                alert("el equipo se demoro menos que el minimo. min = "+minmin+"tiempo de la presentacion = "+expTime);
+            }else if (expTime>minmax){
+                alert("el equipo se demoro mas que el maximo. max = "+minmax+"tiempo de la presentacion = "+expTime);
+            }
+
             form = document.getElementById('evaluation_done_form');
             form.submit();
         }

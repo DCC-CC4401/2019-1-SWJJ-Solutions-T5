@@ -116,13 +116,20 @@ def evaluate(request, evaluation_id):
 
         for v in evaluators:
             accounts_evaluators.append(v.account)
+        minmin=evaluation.rubric.duration_min
+        minmax=evaluation.rubric.duration_max
         rubric = evaluation.rubric.get_rubric()
+
+        minutes=int(data['minutes'])
         return render(request, 'evaluation/evaluation.html', {'evaluation': evaluation,
                                                               'course': course,
                                                               'accounts': accounts,
                                                               'evaluators': accounts_evaluators,
                                                               'students': students,
-                                                              'rubric': rubric})
+                                                              'rubric': rubric,
+                                                              'minutes': minutes,
+                                                              'minmin':minmin,
+                                                              'minmax':minmax})
 
     return render(request, 'evaluation/evaluation.html', {'evaluation': evaluation,
                                                                   'course': course,
