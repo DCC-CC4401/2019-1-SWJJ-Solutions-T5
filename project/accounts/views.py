@@ -95,7 +95,7 @@ def delete_account(request):
         account.delete()
         usuario = User.objects.get(email=mail)
         usuario.delete()
-    accounts= Account.objects.all()
+    accounts = Account.objects.filter(~Q(correo=request.user.email))
     return render(request, 'accounts/signup.html',{'accounts':accounts})
 
 def details_view(request):
