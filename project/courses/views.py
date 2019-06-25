@@ -18,10 +18,10 @@ def courses_list(request):
         year = request.POST['year']
         if (title != '' and code != '' and semester != '' and section != '' and year != ''):
             try:
-                course = Course.objects.get(title = title, code = code,
+                course = Course.objects.get(code = code,
                                            semester = semester,
                                            section = section, year = year)
-                messages.error(request, 'El curso que intenta crear ya existe')
+                messages.error(request, 'La combinación de código, sección, semestre, año ya existe')
             except Course.DoesNotExist:
                 course = Course.objects.create(title = title, code = code,
                                                semester = semester,
