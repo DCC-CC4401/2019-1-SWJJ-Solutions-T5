@@ -7,6 +7,7 @@ from evaluation.models import *
 from .forms import *
 
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 # Create your views here.
 
@@ -77,6 +78,15 @@ def rubric_details(request, rubric_key):
 
 def rubric_modify(request, rubric_key):
     rubric = Rubric.objects.get(name=rubric_key)
+    evaluation=Evaluation.objects.filter(rubric=rubric)
+    for e in evaluation:
+        grades=Evaluation_Student.objects.filter(evaluation_id=e)
+        for g in grades:
+            if (g.grade >0):
+                messages.error(request, 'Esta rúbrica esta siendo utilizada en una evaluación. No puedes moficarla')
+                rubrics=Rubric.objects.all()
+                return redirect('rubrics:rubrics')
+            
     rub = rubric.get_rubric()
     rubrics = Rubric.objects.all()
     names = []
